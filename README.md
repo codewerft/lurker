@@ -8,7 +8,9 @@ tool for monitoring changes in a directory.
 
 ## Installation
 
-```
+Grab the latest release directly from Github:
+
+```bash
 wget https://raw.githubusercontent.com/codewerft/lurker/release/lurker.sh
 chmod +x lurker.sh
 ```
