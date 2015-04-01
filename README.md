@@ -30,14 +30,14 @@ brew install fswatch
 
 **On Linux:**
 
-Build from source - [Instructions](https://github.com/emcrisostomo/fswatch/blob/master/INSTALL).
+Build from source. Here are the [Instructions](https://github.com/emcrisostomo/fswatch/blob/master/INSTALL).
 
 ## Usage
 
 This is a simple example how to lurker to build and run a go web service:
 
 ```
-./lurker.sh -d . -c go run -t
+./lurker.sh -d . -t -c "go run" 
 ```
 
 The above example uses the ``-t`` flag because ``go run`` builds and starts a non-returning web service. The ``-t`` flag instructs lurker to termiante the previous instance of ``go run`` before executing a new one. 
