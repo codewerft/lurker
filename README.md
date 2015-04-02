@@ -34,10 +34,10 @@ Build from source. Here are the [Instructions](https://github.com/emcrisostomo/f
 
 ## Usage
 
-This is a simple example how to lurker to build and run a go web service:
+This is a simple example how to use lurker to build and run a go web service whenever something changes in the ``./src`` directory:
 
 ```
-./lurker.sh -d . -t -c "go run" 
+./lurker.sh -d ./src -t -c "go run" 
 ```
 
 The above example uses the ``-t`` flag because ``go run`` builds and starts a non-returning web service. The ``-t`` flag instructs lurker to termiante the previous instance of ``go run`` before executing a new one. 
