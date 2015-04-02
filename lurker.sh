@@ -12,6 +12,7 @@ WATCH_DIR=
 EXCLUDE=0
 COMMAND=
 ACTIVE_PID=0
+TERMINATE=0
 
 # -----------------------------------------------------------------------------
 # Some ANSI color definitions
@@ -91,7 +92,7 @@ fswatch --version >/dev/null 2>&1 || {
     exit 1;
 }
 
-while getopts hvkd:c:e: OPTION
+while getopts hvtkd:c:e: OPTION
 do
     case $OPTION in
         h)
@@ -111,8 +112,8 @@ do
         c)
             COMMAND=$OPTARG
             ;;
-        k)
-            KILL=true
+        t)
+            TERMINATE=1
             ;;
         ?)
             usage
@@ -155,54 +156,3 @@ do
     echo -e "$CLR_OK$(log_prefix) launched command '$COMMAND' with pid $ACTIVE_PID$CLR_RESET" >&2
 
 done
-
-
-
-# # Construct the Git checkout URL.
-# CHECKOUT_URL=$REPOSITORY_URL
-# if ! [[ -z $TOKEN ]] ; then
-#     CHECKOUT_URL=`echo $REPOSITORY_URL | sed -e "s/:\/\//\:\/\/$TOKEN@/g"`
-# fi
-#
-# # Make sure the checkout dir exists and we have write permission.
-# if ! [[ -d "$CHECKOUT_DIR" ]] ; then
-#   # Control will enter here if $DIRECTORY doesn't exist.
-#   echo " * Creating checkout directory $CHECKOUT_DIR"
-#   mkdir -p $CHECKOUT_DIR
-# fi
-#
-# # Change into working directory and check if it is a valid git repository.
-# cd $CHECKOUT_DIR
-# git status
-# if [[ $? != 0 ]] ; then
-#     # It is not. Clone the repository.
-#     git clone -b $BRANCH $CHECKOUT_URL .
-# fi
-#
-# for (( ; ; ))
-# do
-#     # Update the repository
-#     printf " * Updating repository (git pull)"
-#     git pull
-#     if [[ $? != 0 ]] ; then
-#         # Git command failed.
-#         printf " [FAILED]\n"
-#     else
-#         printf " [OK]\n"
-#     fi
-#
-#     # Run the build command
-#     printf " * Building repository ($BUILD_COMMAND)"
-#     $BUILD_COMMAND
-#     if [[ $? != 0 ]] ; then
-#         # Build command failed.
-#         printf " [FAILED]\n"
-#     else
-#         printf " [OK]\n"
-#     fi
-#
-#     # Slee until the next interval
-#     sleep $UPDATE_INTERVAL
-# done
-
-exit 0
