@@ -11,7 +11,8 @@ inside [Docker](http://www.docker.com) containers on our
 test and integration servers.
 
 Lurker uses the excellent [fswatch](https://github.com/emcrisostomo/fswatch)
-tool for monitoring changes in a directory and it works on Linux and OS X.
+tool (it's really just a wrapper around it) for monitoring changes in a directory 
+and it works on Linux and OS X.
 
 ![The lurker in action...](https://raw.githubusercontent.com/codewerft/lurker/gh-pages/screenshot.png "The lurker in action...")
 
