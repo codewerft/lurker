@@ -52,8 +52,8 @@ usage()
 cat << EOF
 usage: $SCRIPTNAME options
 
-$SCRIPTNAME recursively monitors a directory for changes and executes a
-user-defined command if a change was detected.
+$SCRIPTNAME is a simple bash script that recursively monitors a directory and
+executes a user-defined command when the directory content changes.
 
 OPTIONS:
 
@@ -72,9 +72,9 @@ OPTIONS:
 
 EXAMPLES:
 
-  Watch for changes in the current directory and
+  Watch the source directory of a Go web serivce, build and run on change. 
 
-$SCRIPTNAME.sh -d . -c "go run"
+$SCRIPTNAME.sh -d ./src -t -c "go run"
 
 
 EOF
@@ -143,7 +143,7 @@ do
 
     # Kill the previous command (if there was one), report on the results
     if [ $ACTIVE_PID -ne 0 ]; then
-        if ! kill -TERM $ACTIVE_PID > /dev/null 2>&1; then
+        if ! pkill -P $ACTIVE_PID > /dev/null 2>&1; then
           echo -e "$CLR_WARNING$(log_prefix) couldn't terminate process with pid $ACTIVE_PID (already dead)$CLR_RESET" >&2
         else
           echo -e "$CLR_OK$(log_prefix) successfully terminated process with pid $ACTIVE_PID$CLR_RESET" >&2
@@ -151,8 +151,8 @@ do
     fi
 
     # Launch the 'command', record the pid
-    $COMMAND > /dev/null 2>&1  &
+    $COMMAND 2>&1 &
     ACTIVE_PID=$!
+    trap "pkill -P $ACTIVE_PID; echo -e '$CLR_OK$(log_prefix) terminated all background processes on exit$CLR_RESET'; exit" SIGHUP SIGINT SIGTERM
     echo -e "$CLR_OK$(log_prefix) launched command '$COMMAND' with pid $ACTIVE_PID$CLR_RESET" >&2
-
 done
