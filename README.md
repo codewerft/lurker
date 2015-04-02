@@ -1,17 +1,17 @@
 # lurker
 
 Lurker is a simple bash script that recursively monitors a directory and
-executes a user-defined command when the directory content changes. Lurker is 
+executes a user-defined command when the directory content changes. Lurker is
 somewhat similar to tools like [grunt-watch](https://github.com/gruntjs/grunt-contrib-watch),
 but much much simpler and probably less oppinionated.
 
 At Codewerft we use Lurker to dynamically build and run our  
-[Go](http://golang.org/) microservices, locally on our Desktops as well as 
-inside [Docker](http://www.docker.com) containers on our 
+[Go](http://golang.org/) microservices, locally on our Desktops as well as
+inside [Docker](http://www.docker.com) containers on our
 test and integration servers.
 
-Lurker uses the excellent [fswatch](https://github.com/emcrisostomo/fswatch)
-tool (it's really just a wrapper around it) for monitoring changes in a directory 
+Lurker uses the excellent [fswatch](http://emcrisostomo.github.io/fswatch/)
+tool (it's really just a wrapper around it) for monitoring changes in a directory
 and it works on Linux and OS X.
 
 ![The lurker in action...](https://raw.githubusercontent.com/codewerft/lurker/gh-pages/screenshot.png "The lurker in action...")
@@ -35,7 +35,7 @@ brew install fswatch
 
 **On Linux:**
 
-Build from source. Here are the [Instructions](https://github.com/emcrisostomo/fswatch/blob/master/INSTALL).
+Build from source. Here are the [Instructions](http://emcrisostomo.github.io/fswatch/).
 
 ## Usage
 
