@@ -18,26 +18,25 @@ and it works on Linux and OS X.
 
 ## Installation
 
-Grab the latest release directly from Github:
+Grab the latest release directly from Github: https://github.com/codewerft/lurker/releases
 
-```bash
-wget https://raw.githubusercontent.com/codewerft/lurker/release/lurker.sh
-chmod +x lurker.sh
-```
+Unpack the archive, set the executable permissions for the shell script (``chmod +x lurker.sh``) and off yer go. 
 
-Lurker will fail if fswatch is not installed.
-
-**On OS X:**
-
-```
-brew install fswatch
-```
-
-**On Linux:**
-
-Build from source. Here are the [Instructions](http://emcrisostomo.github.io/fswatch/).
+> **NOTE**: Lurker will fail if fswatch is not installed.
+>
+> *On OS X:*
+> 
+> ```
+> brew install fswatch
+> ```
+> 
+> *On Linux:*
+> 
+> Build from source. Here are the [Instructions](http://emcrisostomo.github.io/fswatch/).
 
 ## Usage
+
+> **NOTE**: ``lurker.sh -h`` gives you the full list of command-line options. 
 
 This is a simple example how to use lurker to build and run a go web service
 whenever something changes in the ``./src`` directory:
