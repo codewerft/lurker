@@ -81,7 +81,35 @@ EOF
 }
 
 # -----------------------------------------------------------------------------
-# Script entry point
+# Launch the 'user command', set trap, record the pid
+#
+run_user_command()
+{
+  $COMMAND 2>&1 &
+  ACTIVE_PID=$!
+  trap "pkill -P $ACTIVE_PID; echo -e '$CLR_OK$(log_prefix) terminated all background processes on exit$CLR_RESET'; exit" SIGHUP SIGINT SIGTERM
+  echo -e "$CLR_OK$(log_prefix) launched command '$COMMAND' with pid $ACTIVE_PID$CLR_RESET" >&2
+}
+
+# -----------------------------------------------------------------------------
+# Terminate the 'user command'
+#
+terminate_user_command()
+{
+  # only if the -t flag was provided
+  if [ $TERMINATE -ne 0 ]; then
+    if [ $ACTIVE_PID -ne 0 ]; then
+      if ! pkill -P $ACTIVE_PID > /dev/null 2>&1; then
+        echo -e "$CLR_WARNING$(log_prefix) couldn't terminate process with pid $ACTIVE_PID (already dead)$CLR_RESET" >&2
+      else
+        echo -e "$CLR_OK$(log_prefix) successfully terminated process with pid $ACTIVE_PID$CLR_RESET" >&2
+      fi
+    fi
+  fi
+}
+
+# -----------------------------------------------------------------------------
+# MAIN - Script entry point
 #
 
 # make sure fswatch is installed, exit with error if not
@@ -129,6 +157,9 @@ then
     exit 1
 fi
 
+# Launch the 'user command', record the pid
+run_user_command
+
 # The main loop, watching for changes, reacting to them
 while true
 do
@@ -142,17 +173,9 @@ do
     echo -e "$CLR_CHANGE$(log_prefix) change detected in $CHANGE$CLR_RESET" >&2
 
     # Kill the previous command (if there was one), report on the results
-    if [ $ACTIVE_PID -ne 0 ]; then
-        if ! pkill -P $ACTIVE_PID > /dev/null 2>&1; then
-          echo -e "$CLR_WARNING$(log_prefix) couldn't terminate process with pid $ACTIVE_PID (already dead)$CLR_RESET" >&2
-        else
-          echo -e "$CLR_OK$(log_prefix) successfully terminated process with pid $ACTIVE_PID$CLR_RESET" >&2
-        fi
-    fi
+    terminate_user_command
 
-    # Launch the 'command', record the pid
-    $COMMAND 2>&1 &
-    ACTIVE_PID=$!
-    trap "pkill -P $ACTIVE_PID; echo -e '$CLR_OK$(log_prefix) terminated all background processes on exit$CLR_RESET'; exit" SIGHUP SIGINT SIGTERM
-    echo -e "$CLR_OK$(log_prefix) launched command '$COMMAND' with pid $ACTIVE_PID$CLR_RESET" >&2
+    # Launch the 'user command', record the pid
+    run_user_command
+
 done
