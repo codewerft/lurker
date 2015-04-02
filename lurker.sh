@@ -72,7 +72,7 @@ OPTIONS:
 
 EXAMPLES:
 
-  Watch the source directory of a Go web serivce, build and run on change. 
+  Watch the source directory of a Go web serivce, build and run on change.
 
 $SCRIPTNAME.sh -d ./src -t -c "go run"
 
