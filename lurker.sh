@@ -9,7 +9,7 @@
 SCRIPTNAME=`basename $0`
 SCRIPTVERSION=0.1
 WATCH_DIR=
-EXCLUDE=0
+EXCLUDE=""
 COMMAND=
 ACTIVE_PID=0
 TERMINATE=0
@@ -165,7 +165,7 @@ while true
 do
     # Watch out for changes. fswatch blocks until it sees a change
     echo -e "$CLR_OK$(log_prefix) watching $WATCH_DIR for changes$CLR_RESET" >&2
-    if [ $EXCLUDE -ne 0 ]; then
+    if [ -n $EXCLUDE ]; then
         CHANGE=`fswatch --recursive --one-event --exclude $EXCLUDE $WATCH_DIR`
     else
         CHANGE=`fswatch --recursive --one-event $WATCH_DIR`

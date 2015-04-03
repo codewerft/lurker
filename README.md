@@ -17,23 +17,23 @@ Unpack the archive, set the executable permissions for the shell script (``chmod
 > **NOTE**: Lurker will fail if fswatch is not installed.
 >
 > *On OS X:*
-> 
+>
 > ```
 > brew install fswatch
 > ```
-> 
+>
 > *On Linux:*
-> 
+>
 > Build from source. Here are the [Instructions](http://emcrisostomo.github.io/fswatch/).
 
 ## Usage
 
-> **NOTE**: ``lurker.sh -h`` gives you the full list of command-line options. 
+> **NOTE**: ``lurker.sh -h`` gives you the full list of command-line options.
 
 Here's a simple example showing how to use lurker to build and run a go web service whenever a file changes in the ``./src`` directory:
 
 ```
-./lurker.sh -d ./src -t -c "go run"
+./lurker.sh -d ./src -e '\.git/' -t -c 'go run'
 ```
 
-In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one.
+In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one. The ``-e`` flag tells lurker to ignore changes in the `.git` directoy. 
