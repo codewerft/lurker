@@ -158,7 +158,7 @@ then
 fi
 
 # Launch the 'user command' synchronously first
-run_user_command()
+run_user_command
 
 # The main loop, watching for changes, reacting to them
 while true
