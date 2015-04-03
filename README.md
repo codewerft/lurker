@@ -33,10 +33,10 @@ Unpack the archive, set the executable permissions for the shell script (``chmod
 Here's a simple example showing how to use lurker to build and run a go web service whenever a file changes in the ``./src`` directory:
 
 ```
-./lurker.sh -d ./src -e 'bin\|pkg\|\.git/' -t -c 'go run'
+./lurker.sh -d ./src -e 'bin/\|pkg/\|\.git/'' -t -c 'go run'
 ```
 
-In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one. The ``-e`` flag tells lurker to ignore changes in the `.git/`, `pkg/`, and `bin/` directories.
+In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one. The regular expression passed via the ``-e`` flag tells lurker to ignore changes in the `.git/`, `pkg/`, and `bin/` directories.
 
 ## Changelog
 
