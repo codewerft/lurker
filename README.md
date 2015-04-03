@@ -36,4 +36,15 @@ Here's a simple example showing how to use lurker to build and run a go web serv
 ./lurker.sh -d ./src -e '\.git/' -t -c 'go run'
 ```
 
-In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one. The ``-e`` flag tells lurker to ignore changes in the `.git` directoy. 
+In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one. The ``-e`` flag tells lurker to ignore changes in the `.git` directoy.
+
+## Changelog
+
+## 0.2 - April 03. 2015
+
+* Fix for exclude pattern handling.
+
+
+## 0.1 - April 02. 2015
+
+* First public release of lurker, tested on Linux and OS X.
