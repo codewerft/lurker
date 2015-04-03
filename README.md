@@ -5,10 +5,9 @@ executes a user-defined command when the directory content changes. Lurker is
 somewhat similar to tools like [grunt-watch](https://github.com/gruntjs/grunt-contrib-watch),
 but much much simpler and probably less oppinionated.
 
-At Codewerft we use Lurker to dynamically build and run our  
-[Go](http://golang.org/) microservices, locally on our Desktops as well as
-inside [Docker](http://www.docker.com) containers on our
-test and integration servers.
+We use Lurker to dynamically build and run our  
+[Go](http://golang.org/) microservices, locally on our development machines as well as
+inside [Docker](http://www.docker.com) containers on our test and integration servers.
 
 Lurker uses the excellent [fswatch](http://emcrisostomo.github.io/fswatch/)
 tool (it's really just a wrapper around it) for monitoring changes in a directory
