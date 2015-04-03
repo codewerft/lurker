@@ -40,11 +40,11 @@ In the example above, ``go run`` never returns as it builds and starts a web ser
 
 ## Changelog
 
-## 0.2 - April 03. 2015
+### 0.2 - April 03. 2015
 
 * Fix for exclude pattern handling.
 
 
-## 0.1 - April 02. 2015
+### 0.1 - April 02. 2015
 
 * First public release of lurker, tested on Linux and OS X.
