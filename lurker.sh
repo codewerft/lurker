@@ -157,8 +157,9 @@ then
     exit 1
 fi
 
-# Launch the 'user command', record the pid
-run_user_command
+# Launch the 'user command' synchronously first
+echo -e "$CLR_OK$(log_prefix) initially running command '$COMMAND'$CLR_RESET" >&2
+$COMMAND
 
 # The main loop, watching for changes, reacting to them
 while true
