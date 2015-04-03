@@ -12,7 +12,7 @@ Lurker uses the excellent [fswatch](http://emcrisostomo.github.io/fswatch/) tool
 
 Grab the latest release directly from Github: https://github.com/codewerft/lurker/releases
 
-Unpack the archive, set the executable permissions for the shell script (``chmod +x lurker.sh``) and off yer go. 
+Unpack the archive, set the executable permissions for the shell script (``chmod +x lurker.sh``) and off yer go. If you want to make lurker available globablly, you can copy it to ``/usr/local/bin`` or any other directory in your ``$PATH``.
 
 > **NOTE**: Lurker will fail if fswatch is not installed.
 >
@@ -30,11 +30,10 @@ Unpack the archive, set the executable permissions for the shell script (``chmod
 
 > **NOTE**: ``lurker.sh -h`` gives you the full list of command-line options. 
 
-This is a simple example how to use lurker to build and run a go web service
-whenever something changes in the ``./src`` directory:
+Here's a simple example showing how to use lurker to build and run a go web service whenever a file changes in the ``./src`` directory:
 
 ```
 ./lurker.sh -d ./src -t -c "go run"
 ```
 
-The above example uses the ``-t`` flag because ``go run`` builds and starts a non-returning web service. The ``-t`` flag instructs lurker to termiante the previous instance of ``go run`` before executing a new one.
+In the example above, ``go run`` never returns as it builds and starts a web service. We use the ``-t`` flag to instruct lurker to terminate the previous instance of ``go run`` before executing a new one.
