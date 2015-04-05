@@ -9,6 +9,7 @@
 SCRIPTNAME=`basename $0`
 SCRIPTVERSION=0.3
 WATCH_DIR=
+LATENCY=1
 EXCLUDE=""
 COMMAND=
 ACTIVE_PID=0
@@ -58,15 +59,11 @@ executes a user-defined command when the directory content changes.
 OPTIONS:
 
    -d DIR      Watch DIR for changes
-
    -e REGEX    Exclude paths matching REGEX
-
    -c COMMAND  Execute COMMAND after a change was detected
-
+   -l LATENCY  Minimum latency between build events (default 1s)
    -t          Try to terminate the previous instance of COMMAND before running it again
-
    -v          Print the version of $SCRIPTNAME and exit.
-
    -h          Show this message
 
 
@@ -120,7 +117,7 @@ fswatch --version >/dev/null 2>&1 || {
     exit 1;
 }
 
-while getopts hvtkd:c:e: OPTION
+while getopts hvtkd:c:e:l: OPTION
 do
     case $OPTION in
         h)
@@ -139,6 +136,9 @@ do
             ;;
         c)
             COMMAND=$OPTARG
+            ;;
+        l)
+            LATENCY=$OPTARG
             ;;
         t)
             TERMINATE=1
@@ -166,9 +166,9 @@ do
     # Watch out for changes. fswatch blocks until it sees a change
     echo -e "$CLR_OK$(log_prefix) watching $WATCH_DIR for changes$CLR_RESET" >&2
     if [ -n $EXCLUDE ]; then
-        CHANGE=`fswatch --recursive --monitor=poll_monitor --one-event --extended --exclude $EXCLUDE $WATCH_DIR`
+        CHANGE=`fswatch --latency=$LATENCY --recursive --monitor=poll_monitor --one-event --extended --exclude $EXCLUDE $WATCH_DIR`
     else
-        CHANGE=`fswatch --recursive --monitor=poll_monitor --one-event $WATCH_DIR`
+        CHANGE=`fswatch --latency=$LATENCY --recursive --monitor=poll_monitor --one-event $WATCH_DIR`
     fi
     echo -e "$CLR_CHANGE$(log_prefix) change detected in $CHANGE$CLR_RESET" >&2
 
