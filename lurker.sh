@@ -7,7 +7,7 @@
 # Global variables
 #
 SCRIPTNAME=`basename $0`
-SCRIPTVERSION=0.2
+SCRIPTVERSION=0.3
 WATCH_DIR=
 EXCLUDE=""
 COMMAND=
