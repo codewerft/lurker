@@ -166,7 +166,7 @@ do
     # Watch out for changes. fswatch blocks until it sees a change
     echo -e "$CLR_OK$(log_prefix) watching $WATCH_DIR for changes$CLR_RESET" >&2
     if [ -n $EXCLUDE ]; then
-        CHANGE=`fswatch --recursive --monitor=poll_monitor --one-event --exclude $EXCLUDE $WATCH_DIR`
+        CHANGE=`fswatch --recursive --monitor=poll_monitor --one-event --extended --exclude $EXCLUDE $WATCH_DIR`
     else
         CHANGE=`fswatch --recursive --monitor=poll_monitor --one-event $WATCH_DIR`
     fi
